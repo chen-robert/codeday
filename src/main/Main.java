@@ -9,7 +9,7 @@ public class Main {
 		JFrame frame = new JFrame("Derp");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		Board b = new Board();
+		Board b = new Board(frame);
 		b.setPreferredSize(new Dimension(500,500));
 		
 		frame.add(b);
