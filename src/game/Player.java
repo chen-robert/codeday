@@ -51,7 +51,9 @@ public class Player extends Ship implements KeyListener{
 			case KeyEvent.VK_A:
 				angle-=Math.PI/20;
 				break;
-					
+			case KeyEvent.VK_Z:
+				action();
+				break;
 			}
 
 			vx += v * Math.cos(angle);

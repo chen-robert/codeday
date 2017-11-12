@@ -19,5 +19,6 @@ public class Block extends Entity{
 		g.fillRect(0, 0, 10, 10);
 		return ret;
 	}
+	public void action() {}
 
 }

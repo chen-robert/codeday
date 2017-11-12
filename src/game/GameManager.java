@@ -14,10 +14,16 @@ public class GameManager {
 	}
 	private List<Entity> entities;
 	private List<Entity> futureEntity;
+	
+	private List<Bullet> bullets;
+	private List<Ship> collidable;
 	private Player p;
 	public void init() {
 		entities = new ArrayList<Entity>();
 		futureEntity = new LinkedList<Entity>();
+		bullets = new ArrayList<Bullet>();
+		collidable = new ArrayList<Ship>();
+		
 		p = new Player();
 		entities.add(p);
 		entities.add(new Block(105, 5));
@@ -31,6 +37,12 @@ public class GameManager {
 	}
 	public void addEntity(Entity e) {
 		futureEntity.add(e);
+	}
+	public void addBullet(Bullet b) {
+		bullets.add(b);
+	}
+	public void addShip(Ship s) {
+		collidable.add(s);
 	}
 	public List<Entity> getEntities(){
 		return entities;

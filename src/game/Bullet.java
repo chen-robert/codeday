@@ -11,6 +11,8 @@ public class Bullet extends Entity{
 		
 		vx = speed * Math.cos(angle);
 		vy = speed * Math.sin(angle);
+		
+		GameManager.gm.addBullet(this);
 	}
 
 	@Override

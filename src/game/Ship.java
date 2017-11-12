@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import game.blocks.Block;
+import game.blocks.Cannon;
 
 public class Ship extends Entity{
 	private HashSet<Block> blocks = new HashSet<>();
@@ -20,7 +21,7 @@ public class Ship extends Entity{
 	public Ship(int x, int y) {
 		super(x, y);
 		
-		blocks.add(new Block(0,0));
+		blocks.add(new Cannon(0,0));
 		blocks.add(new Block(10, 0));
 		
 		for(Block b: blocks) {
@@ -30,6 +31,8 @@ public class Ship extends Entity{
 			double angle = Math.atan2(b.getX(), b.getY());
 			lookup.put(b, new Info(mag, angle));
 		}
+		
+		GameManager.gm.addShip(this);
 	}
 	public void tick() {
 		super.tick();
@@ -41,6 +44,11 @@ public class Ship extends Entity{
 			b.x = n.mag * Math.cos(n.angle + angle) + x;
 			b.y = n.mag * Math.sin(n.angle + angle) + y;
 			b.angle = angle;
+		}
+	}
+	public void action() {
+		for(Block b: blocks) {
+			b.action();
 		}
 	}
 
