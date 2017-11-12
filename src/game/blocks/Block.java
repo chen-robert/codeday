@@ -9,7 +9,8 @@ import game.Entity;
 import game.particles.Particle;
 
 public class Block extends Entity{
-	private int health = 10;
+	protected int health = 10;
+	protected Color particleColor = Color.RED;
 	protected Object parent;
 	public Block(int x, int y, Object parent) {
 		super(x, y);
@@ -30,9 +31,14 @@ public class Block extends Entity{
 		if(!b.isAlive())return;
 		b.hit();
 		
-		new Particle((int) x, (int) y, Color.RED);
+		new Particle((int) x, (int) y, particleColor);
 		health--;
-		if(health <= 0)alive = false;
+		if(health <= 0) {
+			alive = false;
+			
+			for(int i = 0; i < 10; i++)
+				new Particle((int) x, (int) y, Color.RED);
+		}
 	}
 
 }

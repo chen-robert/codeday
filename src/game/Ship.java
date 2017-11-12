@@ -8,7 +8,7 @@ import java.util.List;
 import game.blocks.Block;
 import game.blocks.Cannon;
 import game.blocks.MissileLauncher;
-import game.blocks.Thruster;
+import game.blocks.Shield;
 
 public class Ship extends Entity{
 	protected List<Block> blocks = new ArrayList<>();
@@ -30,7 +30,7 @@ public class Ship extends Entity{
 			for(int z = -wid; z <= wid; z++) {
 				if(Math.random() < 0.8) {
 					double val = Math.random();
-					if(val < 0.5) blocks.add(new Thruster(10*i,10*z,this));
+					if(val < 0.5) blocks.add(new Shield(10*i,10*z,this));
 					else if(val < 1)blocks.add(new Cannon(10*i,10*z,this));
 					else blocks.add(new MissileLauncher(10*i,10*z,this));
 				}
@@ -113,7 +113,7 @@ public class Ship extends Entity{
 	public double getSpeed() {
 		int count = 0;
 		for(Block b: blocks) {
-			if(b.getClass().equals(Thruster.class))count++;
+			if(b.getClass().equals(Shield.class))count++;
 		}
 		return (double) count / blocks.size();
 	}

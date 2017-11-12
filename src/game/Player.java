@@ -9,7 +9,7 @@ import java.util.HashSet;
 
 import game.blocks.Cannon;
 import game.blocks.MissileLauncher;
-import game.blocks.Thruster;
+import game.blocks.Shield;
 
 public class Player extends Ship implements KeyListener{
 	private HashSet<Integer> keys = new HashSet<>();
@@ -59,7 +59,7 @@ public class Player extends Ship implements KeyListener{
 				action(MissileLauncher.class);
 				break;
 			case KeyEvent.VK_SHIFT:
-				action(Thruster.class);
+				action(Shield.class);
 				vx *= 0.9;
 				vy *= 0.9;
 				break;
@@ -70,7 +70,7 @@ public class Player extends Ship implements KeyListener{
 				vx += speed * v * Math.cos(angle);
 				vy += speed * v * Math.sin(angle);
 				
-				action(Thruster.class);
+				action(Shield.class);
 			}
 		}
 	}

@@ -36,12 +36,17 @@ public class GameManager {
 		testCollisions();
 		cleanup();
 		
-		if(collidable.size() < 100) {
-			new AI(p.getX() + (int) (1000 * Math.random()), p.getY() + (int) (1000 * Math.random()));
+		if(collidable.size() < 25) {
+			new AI(p.getX() + (int) (1000 * Math.random()) - 500,
+					p.getY() + (int) (1000 * Math.random()) - 500);
 		}
 		if(!p.isAlive()) {
-			p.x = collidable.get(0).x;
-			p.y = collidable.get(0).y;
+			Ship s = collidable.get(0);
+			int n = 0;
+			while(s.getClass().equals(DeadShip.class))s = collidable.get(n++);
+			
+			p.x = s.x;
+			p.y = s.y;
 		}
 		
 	}

@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import main.ImageLoader;
+
 public class Bullet extends Entity{
 	protected int ticks = 0;
 	private Object parent;
@@ -25,11 +27,7 @@ public class Bullet extends Entity{
 
 	@Override
 	public BufferedImage getImg() {
-		BufferedImage img = new BufferedImage(3, 3, BufferedImage.TYPE_INT_ARGB);
-		Graphics g = img.getGraphics();
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 3, 3);
-		return img;
+		return ImageLoader.get("bullet");
 	}
 	@Override
 	public void tick() {

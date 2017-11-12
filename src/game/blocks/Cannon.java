@@ -15,8 +15,7 @@ public class Cannon extends Block{
 	@Override
 	public void action() {
 		if(delay < 0) {
-			new Bullet((int) x, (int) y, 10, angle, parent);
-			new Particle((int) x, (int) y, Color.BLUE);
+			new Bullet((int) x, (int) y, 30, angle, parent);
 			delay = (int) (10 * Math.random()) + 2;
 		}
 	}
