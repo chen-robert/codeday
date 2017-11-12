@@ -44,7 +44,7 @@ public class Board extends JPanel{
 		}
 		
 		try {
-			Thread.sleep(100);
+			Thread.sleep(30);
 		}catch(Exception e) {}
 		repaint();
 	}

@@ -6,12 +6,15 @@ import java.awt.image.BufferedImage;
 
 public class Bullet extends Entity{
 	private int ticks = 0;
+	private Object parent;
 	protected int radius = 5;
-	public Bullet(int x, int y, double speed, double angle) {
+	public Bullet(int x, int y, double speed, double angle, Object parent) {
 		super(x, y);
 		
 		vx = speed * Math.cos(angle);
 		vy = speed * Math.sin(angle);
+		
+		this.parent = parent;
 		
 		GameManager.gm.addBullet(this);
 	}
@@ -36,6 +39,9 @@ public class Bullet extends Entity{
 	}
 	public int getRadius() {
 		return radius;
+	}
+	public Object getParent() {
+		return parent;
 	}
 	
 }

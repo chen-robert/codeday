@@ -22,8 +22,8 @@ public class Ship extends Entity{
 	public Ship(int x, int y) {
 		super(x, y);
 		
-		blocks.add(new Cannon(0,0));
-		blocks.add(new Block(10, 0));
+		blocks.add(new Cannon(0,0,this));
+		blocks.add(new Block(10, 0, this));
 		
 		for(Block b: blocks) {
 			double mag = b.getX() * b.getX() + b.getY() + b.getY();
@@ -55,11 +55,13 @@ public class Ship extends Entity{
 		}
 	}
 	public void collide(Bullet e) {
+		if(e.getParent() == this)return;
+		
 		for(Block b: blocks) {
 			int dx = e.getX() - b.getX();
 			int dy = e.getY() - b.getY();
 			double dist = Math.sqrt(dx * dx + dy * dy);
-			if(dist < 10) {
+			if(dist < 10 + e.getRadius()) {
 				b.hit(e);
 			}
 		}

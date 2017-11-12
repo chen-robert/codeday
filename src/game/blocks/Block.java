@@ -9,9 +9,12 @@ import game.Entity;
 
 public class Block extends Entity{
 	private int health = 10;
-	public Block(int x, int y) {
+	protected Object parent;
+	public Block(int x, int y, Object parent) {
 		super(x, y);
 		angle = 0.5;
+		
+		this.parent = parent;
 	}
 	@Override
 	public BufferedImage getImg() {

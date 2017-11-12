@@ -3,13 +3,21 @@ package game.blocks;
 import game.Bullet;
 
 public class Cannon extends Block{
-
-	public Cannon(int x, int y) {
-		super(x, y);
+	private int delay = 0;
+	public Cannon(int x, int y, Object parent) {
+		super(x, y, parent);
 	}
 	@Override
 	public void action() {
-		new Bullet((int) x, (int) y, 10, angle);
+		if(delay < 0) {
+			new Bullet((int) x, (int) y, 10, angle, parent);
+			delay = (int) (10 * Math.random());
+		}
 	}
-
+	@Override
+	public void tick() {
+		super.tick();
+		
+		delay--;
+	}
 }
