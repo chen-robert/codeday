@@ -14,7 +14,7 @@ import game.Entity;
 import game.GameManager;
 
 public class Board extends JPanel{
-	private GameManager gm = new GameManager();
+	public  GameManager gm = GameManager.gm;
 	public Board(JFrame f) {
 		f.addKeyListener(gm.getPlayer());
 	}

@@ -15,6 +15,8 @@ public abstract class Entity {
 	public Entity(int x, int y) {
 		this.x = x;
 		this.y = y;
+		
+		GameManager.gm.addEntity(this);
 	}
 	public int getX() {
 		return (int) x;
