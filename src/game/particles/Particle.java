@@ -12,8 +12,9 @@ public class Particle extends Entity{
 	public Particle(int x, int y, Color c) {
 		super(x, y);
 		
-		vx = 4 * Math.random() - 2;
-		vy = 4 * Math.random() - 2;
+		int speed = 4;
+		vx = 2 * speed * Math.random() - speed;
+		vy = 2 * speed * Math.random() - speed;
 		
 		this.c = c;
 	}

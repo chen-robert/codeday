@@ -21,9 +21,9 @@ public class MissileLauncher extends Block{
 			Ship s = GameManager.gm.getClosest(this, parent);
 			if(s == null)return;
 			
-			new HomingBullet((int) x, (int) y, 3, angle, s, parent);
+			new HomingBullet((int) x, (int) y, 10, angle, s, parent);
 			new Particle((int) x, (int) y, Color.GREEN);
-			delay = (int) (20 * Math.random()) + 105;
+			delay = (int) (20 * Math.random()) + 5;
 		}
 	}
 	@Override

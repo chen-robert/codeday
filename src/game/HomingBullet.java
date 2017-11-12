@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import main.ImageLoader;
+
 public class HomingBullet extends Bullet{
 	private Entity target;
 	private double speed;
@@ -18,11 +20,12 @@ public class HomingBullet extends Bullet{
 	}
 	@Override
 	public void tick() {
-		double angleTo = Math.atan2(target.getY() - y, target.getX() - x);
-		
-		
-		if(Math.abs(angle - angleTo) > Math.PI / 20) {
-			angle += (angle > angleTo? -1: 1) * Math.PI/50;
+		if(target.isAlive()) {
+			double angleTo = Math.atan2(target.getY() - y, target.getX() - x);
+			
+			if(Math.abs(angle - angleTo) > Math.PI / 20) {
+				angle += (angle > angleTo? -1: 1) * Math.PI/20;
+			}
 		}
 		
 		vx = speed * Math.cos(angle);
@@ -40,12 +43,8 @@ public class HomingBullet extends Bullet{
 	@Override
 	public BufferedImage getImg() {
 		if(delay) {
-			BufferedImage img = new BufferedImage(25, 25, BufferedImage.TYPE_INT_ARGB);
-			Graphics g = img.getGraphics();
-			g.setColor(Color.RED);
-			g.fillRect(0, 0, 25, 25);
-			return img;
-		}else return super.getImg();
+			return ImageLoader.get("explode");
+		}else return ImageLoader.get("homing");
 	}
 
 }

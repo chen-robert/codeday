@@ -22,7 +22,6 @@ public class DeadShip extends Ship{
 		
 		buildInfo();
 		removeUnconnected();
-		System.out.println(blocks.size());
-		
+		tick();
 	}
 }

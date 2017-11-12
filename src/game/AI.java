@@ -1,5 +1,6 @@
 package game;
 
+import game.blocks.Cannon;
 import game.blocks.MissileLauncher;
 
 public class AI extends Ship{
@@ -9,14 +10,19 @@ public class AI extends Ship{
 	}
 	public void tick() {
 		super.tick();
-		if(Math.random() < 0.1)action(MissileLauncher.class);
+		action(MissileLauncher.class);
+		action(Cannon.class);
 		
 		if(target == null || !target.isAlive())target = GameManager.gm.getClosest(this, this);
 		if(target == null)return;
-		double angleTo = Math.atan2(target.getY() - y, target.getX() - x);
+		double angleTo = Math.atan2(target.getY() + 25 - y, target.getX() + 25 - x);
 		
-		vx += 0.2 * getSpeed() * Math.cos(angleTo);
-		vy += 0.2 * getSpeed() * Math.sin(angleTo);
+		if(Math.abs(angle - angleTo) < Math.PI / 50);
+		else if(angle < angleTo)angle += Math.PI / 50;
+		else angle -= Math.PI / 50;
+		
+		vx += 0.2 * getSpeed() * Math.cos(angle);
+		vy += 0.2 * getSpeed() * Math.sin(angle);
 	}
 
 }

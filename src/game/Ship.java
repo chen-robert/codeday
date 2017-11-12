@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import game.blocks.Block;
+import game.blocks.Cannon;
 import game.blocks.MissileLauncher;
 import game.blocks.Thruster;
 
@@ -24,10 +25,12 @@ public class Ship extends Entity{
 		super(x, y);
 		
 		for(int i = -3; i < 4; i++) {
-			for(int z = -3; z < 4; z++) {
-				if(Math.random() < 1) {
-					if(Math.random() < 0.5) blocks.add(new MissileLauncher(10*i,10*z,this));
-					else blocks.add(new Thruster(10*i,10*z,this));
+			for(int z = -1; z < 2; z++) {
+				if(Math.random() < 0.8) {
+					double val = Math.random();
+					if(val < 0.5) blocks.add(new Thruster(10*i,10*z,this));
+					else if(val < 0.6)blocks.add(new Cannon(10*i,10*z,this));
+					else blocks.add(new MissileLauncher(10*i,10*z,this));
 				}
 			}
 		}
@@ -141,7 +144,6 @@ public class Ship extends Entity{
 				aux.add(tmp);
 			}
 		}
-		System.out.println(aux.size());
 		if(aux.size() != 0)new DeadShip((int) x, (int) y, angle, aux);
 	}
 	private void dfs(int x, int y, boolean[][] connected, boolean[][] map) {
