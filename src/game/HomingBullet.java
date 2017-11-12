@@ -13,6 +13,8 @@ public class HomingBullet extends Bullet{
 		this.angle = angle;
 		this.speed = speed;
 		this.target = target;
+		
+		this.ticks = -1000;
 	}
 	@Override
 	public void tick() {
@@ -22,7 +24,6 @@ public class HomingBullet extends Bullet{
 		if(Math.abs(angle - angleTo) > Math.PI / 20) {
 			angle += (angle > angleTo? -1: 1) * Math.PI/50;
 		}
-		angle = angleTo;
 		
 		vx = speed * Math.cos(angle);
 		vy = speed * Math.sin(angle);

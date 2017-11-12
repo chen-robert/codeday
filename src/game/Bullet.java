@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class Bullet extends Entity{
-	private int ticks = 0;
+	protected int ticks = 0;
 	private Object parent;
 	protected int radius = 5;
 	public Bullet(int x, int y, double speed, double angle, Object parent) {

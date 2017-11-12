@@ -25,7 +25,7 @@ public class GameManager {
 		collidable = new ArrayList<Ship>();
 		
 		p = new Player();
-		for(int i = 0; i < 100; i++)new AI((int) (1000 * Math.random()), (int) (1000 * Math.random()));
+		for(int i = 0; i < 5; i++)new AI((int) (100 * Math.random()), (int) (100 * Math.random()));
 	}
 	public void tick() {
 		for(Entity e: entities) {

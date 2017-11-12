@@ -10,7 +10,7 @@ import game.blocks.MissileLauncher;
 import game.blocks.Thruster;
 
 public class Ship extends Entity{
-	private List<Block> blocks = new ArrayList<>();
+	protected List<Block> blocks = new ArrayList<>();
 	private HashMap<Block, Info> lookup = new HashMap<>();
 	private class Info{
 		public double mag;
@@ -31,7 +31,17 @@ public class Ship extends Entity{
 				}
 			}
 		}
+		buildInfo();
+		for(Block b: blocks) {
+			Info n = lookup.get(b);
+		}
 		removeUnconnected();
+		
+		GameManager.gm.addShip(this);
+	}
+	public Ship(int x, int y, List<Block> blocks) {
+		super(x, y);
+		this.blocks = blocks;
 		
 		GameManager.gm.addShip(this);
 	}
@@ -40,7 +50,7 @@ public class Ship extends Entity{
 			double mag = b.getX() * b.getX() + b.getY() * b.getY();
 			mag = Math.sqrt(mag);
 			
-			double angle = Math.atan2(b.getX(), b.getY());
+			double angle = Math.atan2(b.getY(), b.getX());
 			lookup.put(b, new Info(mag, angle));
 		}
 	}
@@ -116,14 +126,23 @@ public class Ship extends Entity{
 		boolean[][] connected = new boolean[map.length][map[0].length];
 		dfs(100, 100, connected, map);
 		
+		List<Block> aux = new ArrayList<Block>();
 		for(int i = 0; i < blocks.size(); i++) {
 			Info n = lookup.get(blocks.get(i));
 			
 			int x = 100 + (int) Math.round(n.mag * Math.cos(n.angle)) / 10;
 			int y = 100 + (int) Math.round(n.mag * Math.sin(n.angle)) / 10;
 			
-			if(!connected[x][y])blocks.remove(i--);
+			if(!connected[x][y]) {
+				Block tmp = blocks.remove(i--);
+				tmp.x = (int) Math.round(n.mag * Math.cos(n.angle));
+				tmp.y = (int) Math.round(n.mag * Math.sin(n.angle));
+
+				aux.add(tmp);
+			}
 		}
+		System.out.println(aux.size());
+		if(aux.size() != 0)new DeadShip((int) x, (int) y, angle, aux);
 	}
 	private void dfs(int x, int y, boolean[][] connected, boolean[][] map) {
 		connected[x][y] = true;
