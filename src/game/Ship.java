@@ -22,7 +22,7 @@ public class Ship extends Entity{
 	public Ship(int x, int y) {
 		super(x, y);
 		
-		blocks.add(new Cannon(0,0,this));
+		for(int i = -3; i < 4; i++)blocks.add(new Cannon(10 * i,0,this));
 		blocks.add(new Block(10, 0, this));
 		
 		for(Block b: blocks) {
@@ -36,6 +36,12 @@ public class Ship extends Entity{
 		GameManager.gm.addShip(this);
 	}
 	public void tick() {
+		if(vx < -4)vx = -4;
+		if(vx > 4)vx = 4;
+
+		if(vy < -4)vy = -4;
+		if(vy > 4)vy = 4;
+		
 		super.tick();
 		
 		for(Block b: blocks) {

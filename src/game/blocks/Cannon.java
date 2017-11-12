@@ -10,8 +10,8 @@ public class Cannon extends Block{
 	@Override
 	public void action() {
 		if(delay < 0) {
-			new Bullet((int) x, (int) y, 10, angle, parent);
-			delay = (int) (10 * Math.random());
+			new Bullet((int) x, (int) y, 5, angle, parent);
+			delay = (int) (10 * Math.random()) + 5;
 		}
 	}
 	@Override

@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -20,6 +21,7 @@ public class Board extends JPanel{
 	}
 	@Override
 	public void paintComponent(Graphics g2) {
+		long start = System.currentTimeMillis();
 		Graphics2D g = (Graphics2D) g2;
 		g.clearRect(0, 0, 500, 500);
 		Point view = gm.getView();
@@ -44,7 +46,10 @@ public class Board extends JPanel{
 		}
 		
 		try {
-			Thread.sleep(30);
+			long delay = System.currentTimeMillis() - start;
+			g.setColor(Color.BLACK);
+			g.drawString(delay + "ms", 10, 10);
+			Thread.sleep(Math.max(0, 30 - delay));
 		}catch(Exception e) {}
 		repaint();
 	}

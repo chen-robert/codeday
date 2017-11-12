@@ -29,14 +29,7 @@ public abstract class Entity {
 		return angle;
 	}
 	private static int maxSpeed = 4;
-	public void tick() {
-		
-		if(vx < -4)vx = -4;
-		if(vx > 4)vx = 4;
-
-		if(vy < -4)vy = -4;
-		if(vy > 4)vy = 4;
-		
+	public void tick() {		
 		x += vx;
 		y += vy;
 	}

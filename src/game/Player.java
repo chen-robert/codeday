@@ -46,18 +46,18 @@ public class Player extends Ship implements KeyListener{
 				v = -1;
 				break;
 			case KeyEvent.VK_D:
-				angle+=Math.PI/20;
+				angle+=Math.PI/40;
 				break;
 			case KeyEvent.VK_A:
-				angle-=Math.PI/20;
+				angle-=Math.PI/40;
 				break;
 			case KeyEvent.VK_Z:
 				action();
 				break;
 			}
 
-			vx += v * Math.cos(angle);
-			vy += v * Math.sin(angle);
+			vx += 0.3 * v * Math.cos(angle);
+			vy += 0.3 * v * Math.sin(angle);
 		}
 	}
 
