@@ -2,16 +2,26 @@ package game;
 
 import game.blocks.Cannon;
 import game.blocks.MissileLauncher;
+import game.blocks.Shield;
 
 public class AI extends Ship{
 	private Ship target;
 	public AI(int x, int y) {
 		super(x, y);
 	}
+	private int cycle = 0;
 	public void tick() {
 		super.tick();
-		action(MissileLauncher.class);
-		action(Cannon.class);
+		cycle--;
+		
+		if(cycle > 15) {
+			action(Shield.class);
+		}else if(cycle < 0){
+			action(MissileLauncher.class);
+			action(Cannon.class);
+			
+			if(Math.random() < 0.1)cycle = 20;
+		}
 		
 		if(target == null || !target.isAlive())target = GameManager.gm.getClosest(this, this);
 		if(target == null)return;

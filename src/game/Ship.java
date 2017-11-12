@@ -82,14 +82,27 @@ public class Ship extends Entity{
 			if(b.getClass().equals(c))b.action();
 		}
 	}
-	public void collide(Bullet e) {
-		if(e.getParent() == this)return;
-		
+	public void collide(Bullet e) {		
 		for(Block b: blocks) {
+			if(!b.getClass().equals(Shield.class))continue;
+			if(e.getParent() == this && !((Shield) b).isActive())continue;
+			
 			int dx = e.getX() - b.getX();
 			int dy = e.getY() - b.getY();
 			double dist = Math.sqrt(dx * dx + dy * dy);
-			if(dist < 10 + e.getRadius()) {
+			if(dist < (((Shield) b).isActive() ? 50: 5) + e.getRadius()) {
+				b.hit(e);
+			}
+		}
+
+		if(e.getParent() == this)return;
+		for(Block b: blocks) {
+			if(b.getClass().equals(Shield.class))continue;
+			
+			int dx = e.getX() - b.getX();
+			int dy = e.getY() - b.getY();
+			double dist = Math.sqrt(dx * dx + dy * dy);
+			if(dist < 5 + e.getRadius()) {
 				b.hit(e);
 			}
 		}

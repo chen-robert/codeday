@@ -31,7 +31,7 @@ public class Block extends Entity{
 		if(!b.isAlive())return;
 		b.hit();
 		
-		new Particle((int) x, (int) y, particleColor);
+		new Particle(b.getX(), b.getY(), particleColor);
 		health--;
 		if(health <= 0) {
 			alive = false;
