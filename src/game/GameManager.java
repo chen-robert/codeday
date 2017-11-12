@@ -65,6 +65,12 @@ public class GameManager {
 		for(int i = 0; i < entities.size(); i++) {
 			if(!entities.get(i).isAlive())entities.remove(i--);
 		}
+		for(int i = 0; i < collidable.size(); i++) {
+			if(!collidable.get(i).isAlive())collidable.remove(i--);
+		}
+		for(int i = 0; i < bullets.size(); i++) {
+			if(!bullets.get(i).isAlive())bullets.remove(i--);
+		}
 	}
 	public void addEntity(Entity e) {
 		futureEntity.add(e);

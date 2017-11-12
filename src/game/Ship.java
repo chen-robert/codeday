@@ -25,13 +25,17 @@ public class Ship extends Entity{
 		
 		for(int i = -3; i < 4; i++) {
 			for(int z = -3; z < 4; z++) {
-				if(Math.random() < 0.3) {
+				if(Math.random() < 1) {
 					if(Math.random() < 0.5) blocks.add(new MissileLauncher(10*i,10*z,this));
 					else blocks.add(new Thruster(10*i,10*z,this));
 				}
 			}
 		}
+		removeUnconnected();
 		
+		GameManager.gm.addShip(this);
+	}
+	protected void buildInfo() {
 		for(Block b: blocks) {
 			double mag = b.getX() * b.getX() + b.getY() * b.getY();
 			mag = Math.sqrt(mag);
@@ -39,8 +43,6 @@ public class Ship extends Entity{
 			double angle = Math.atan2(b.getX(), b.getY());
 			lookup.put(b, new Info(mag, angle));
 		}
-		
-		GameManager.gm.addShip(this);
 	}
 	public void tick() {
 		if(vx < -4)vx = -4;
@@ -80,9 +82,14 @@ public class Ship extends Entity{
 		}
 	}
 	public void cleanup() {
+		boolean remove = false;
 		for(int i = 0; i < blocks.size(); i++) {
-			if(!blocks.get(i).isAlive())blocks.remove(i--);
+			if(!blocks.get(i).isAlive()) {
+				blocks.remove(i--);
+				remove = true;
+			}
 		}
+		if(remove)removeUnconnected();
 	}
 
 	@Override
@@ -102,11 +109,33 @@ public class Ship extends Entity{
 		for(Block b: blocks) {
 			Info n = lookup.get(b);
 			
-			int x = (int) Math.round(n.mag * Math.cos(n.angle));
-			int y = (int) Math.round(n.mag * Math.sin(n.angle));
+			int x = 100 + (int) Math.round(n.mag * Math.cos(n.angle)) / 10;
+			int y = 100 + (int) Math.round(n.mag * Math.sin(n.angle)) / 10;
 			map[x][y] = true;
 		}
+		boolean[][] connected = new boolean[map.length][map[0].length];
+		dfs(100, 100, connected, map);
 		
+		for(int i = 0; i < blocks.size(); i++) {
+			Info n = lookup.get(blocks.get(i));
+			
+			int x = 100 + (int) Math.round(n.mag * Math.cos(n.angle)) / 10;
+			int y = 100 + (int) Math.round(n.mag * Math.sin(n.angle)) / 10;
+			
+			if(!connected[x][y])blocks.remove(i--);
+		}
+	}
+	private void dfs(int x, int y, boolean[][] connected, boolean[][] map) {
+		connected[x][y] = true;
+		map[x][y] = false;
+		if(map[x][y-1])dfs(x, y-1, connected, map);
+		if(map[x][y+1])dfs(x, y+1, connected, map);
+		if(map[x-1][y])dfs(x-1, y, connected, map);
+		if(map[x+1][y])dfs(x+1, y, connected, map);
+	}
+	@Override
+	public boolean isAlive() {
+		return blocks.size() > 0;
 	}
 
 }
