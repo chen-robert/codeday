@@ -5,7 +5,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class Bullet extends Entity{
-	
+	private int ticks = 0;
+	protected int radius = 5;
 	public Bullet(int x, int y, double speed, double angle) {
 		super(x, y);
 		
@@ -22,6 +23,19 @@ public class Bullet extends Entity{
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 3, 3);
 		return img;
+	}
+	@Override
+	public void tick() {
+		super.tick();
+		ticks++;
+		
+		if(ticks > 100)alive = false;
+	}
+	public void hit() {
+		alive = false;
+	}
+	public int getRadius() {
+		return radius;
 	}
 	
 }

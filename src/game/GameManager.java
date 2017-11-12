@@ -26,7 +26,7 @@ public class GameManager {
 		
 		p = new Player();
 		entities.add(p);
-		entities.add(new Block(105, 5));
+		entities.add(new Ship(105, 5));
 	}
 	public void tick() {
 		for(Entity e: entities) {
@@ -34,6 +34,21 @@ public class GameManager {
 		}
 		
 		while(futureEntity.size() > 0)entities.add(futureEntity.remove(0));
+		
+		testCollisions();
+		cleanup();
+	}
+	public void testCollisions() {
+		for(Bullet b: bullets) {
+			for(Ship s: collidable) {
+				s.collide(b);
+			}
+		}
+	}
+	public void cleanup() {
+		for(int i = 0; i < entities.size(); i++) {
+			if(!entities.get(i).isAlive())entities.remove(i--);
+		}
 	}
 	public void addEntity(Entity e) {
 		futureEntity.add(e);

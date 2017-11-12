@@ -11,6 +11,7 @@ public abstract class Entity {
 	
 	protected double angle;
 	
+	protected boolean alive = true;
 	public abstract BufferedImage getImg();
 	public Entity(int x, int y) {
 		this.x = x;
@@ -30,5 +31,8 @@ public abstract class Entity {
 	public void tick() {
 		x += vx;
 		y += vy;
+	}
+	public boolean isAlive() {
+		return alive;
 	}
 }

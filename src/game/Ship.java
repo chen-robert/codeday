@@ -1,14 +1,15 @@
 package game;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 
 import game.blocks.Block;
 import game.blocks.Cannon;
 
 public class Ship extends Entity{
-	private HashSet<Block> blocks = new HashSet<>();
+	private List<Block> blocks = new ArrayList<>();
 	private HashMap<Block, Info> lookup = new HashMap<>();
 	private class Info{
 		public double mag;
@@ -45,10 +46,27 @@ public class Ship extends Entity{
 			b.y = n.mag * Math.sin(n.angle + angle) + y;
 			b.angle = angle;
 		}
+		
+		cleanup();
 	}
 	public void action() {
 		for(Block b: blocks) {
 			b.action();
+		}
+	}
+	public void collide(Bullet e) {
+		for(Block b: blocks) {
+			int dx = e.getX() - b.getX();
+			int dy = e.getY() - b.getY();
+			double dist = Math.sqrt(dx * dx + dy * dy);
+			if(dist < 10) {
+				b.hit(e);
+			}
+		}
+	}
+	public void cleanup() {
+		for(int i = 0; i < blocks.size(); i++) {
+			if(!blocks.get(i).isAlive())blocks.remove(i--);
 		}
 	}
 

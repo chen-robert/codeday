@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import game.Bullet;
 import game.Entity;
 
 public class Block extends Entity{
+	private int health = 10;
 	public Block(int x, int y) {
 		super(x, y);
 		angle = 0.5;
@@ -20,5 +22,12 @@ public class Block extends Entity{
 		return ret;
 	}
 	public void action() {}
+	public void hit(Bullet b) {
+		if(!b.isAlive())return;
+		b.hit();
+		
+		health--;
+		if(health <= 0)alive = false;
+	}
 
 }
