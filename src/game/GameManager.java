@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import game.blocks.Block;
+
 public class GameManager {
 	public static final GameManager gm = new GameManager();
 	static {
