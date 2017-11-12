@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import game.blocks.Block;
-import game.blocks.Cannon;
+import game.blocks.MissileLauncher;
 import game.blocks.Thruster;
 
 public class Ship extends Entity{
@@ -26,7 +26,7 @@ public class Ship extends Entity{
 		for(int i = -3; i < 4; i++) {
 			for(int z = -3; z < 4; z++) {
 				if(Math.random() < 0.3) {
-					if(Math.random() < 0.5) blocks.add(new Cannon(10*i,10*z,this));
+					if(Math.random() < 0.5) blocks.add(new MissileLauncher(10*i,10*z,this));
 					else blocks.add(new Thruster(10*i,10*z,this));
 				}
 			}
@@ -96,6 +96,14 @@ public class Ship extends Entity{
 			if(b.getClass().equals(Thruster.class))count++;
 		}
 		return (double) count / blocks.size();
+	}
+	public void removeUnconnected() {
+		boolean[][] map = new boolean[200][200];
+		for(Block b: blocks) {
+			Info n = lookup.get(b);
+			
+			double x = n.mag * Math.cos(n.angle);
+		}
 	}
 
 }

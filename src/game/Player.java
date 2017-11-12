@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.HashSet;
 
 import game.blocks.Cannon;
+import game.blocks.MissileLauncher;
 import game.blocks.Thruster;
 
 public class Player extends Ship implements KeyListener{
@@ -16,11 +17,7 @@ public class Player extends Ship implements KeyListener{
 	}
 	@Override
 	public BufferedImage getImg() {
-		BufferedImage rect = new BufferedImage(10,10,BufferedImage.TYPE_INT_ARGB);
-		Graphics g = rect.getGraphics();
-		g.setColor(Color.BLUE);
-		g.fillRect(0,0,10,10);
-		return rect;
+		return null;
 	}
 	@Override
 	public void tick() {
@@ -56,6 +53,14 @@ public class Player extends Ship implements KeyListener{
 				break;
 			case KeyEvent.VK_Z:
 				action(Cannon.class);
+				break;
+			case KeyEvent.VK_X:
+				action(MissileLauncher.class);
+				break;
+			case KeyEvent.VK_SHIFT:
+				action(Thruster.class);
+				vx *= 0.9;
+				vy *= 0.9;
 				break;
 			}
 

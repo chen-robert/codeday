@@ -11,17 +11,21 @@ public class ImageLoader {
 	private static HashMap<String, BufferedImage> images;
 	static {
 		images = new HashMap<>();
-		load("cannon");
-		load("thruster");
+		load();
 	}
 	public static BufferedImage get(String s) {
 		return images.get(s);
 	}
-	private static void load(String s) {
-		try {
-			images.put(s, ImageIO.read(new File("resources/" + s + ".png")));
-		}catch(IOException e) {
-			e.printStackTrace();
+	private static void load() {
+		File dir = new File("resources");
+		File[] resources = dir.listFiles();
+		for(File f: resources) {
+			try {
+				String name = f.getName();
+				images.put(name.substring(0, name.indexOf('.')), ImageIO.read(f));
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
