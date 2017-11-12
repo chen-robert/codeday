@@ -106,6 +106,7 @@ public class Ship extends Entity{
 			int y = (int) Math.round(n.mag * Math.sin(n.angle));
 			map[x][y] = true;
 		}
+		
 	}
 
 }
