@@ -102,7 +102,9 @@ public class Ship extends Entity{
 		for(Block b: blocks) {
 			Info n = lookup.get(b);
 			
-			double x = n.mag * Math.cos(n.angle);
+			int x = (int) Math.round(n.mag * Math.cos(n.angle));
+			int y = (int) Math.round(n.mag * Math.sin(n.angle));
+			map[x][y] = true;
 		}
 	}
 
