@@ -1,6 +1,11 @@
 package game.blocks;
 
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+
 import game.Bullet;
+import game.particles.Particle;
+import main.ImageLoader;
 
 public class Cannon extends Block{
 	private int delay = 0;
@@ -11,6 +16,7 @@ public class Cannon extends Block{
 	public void action() {
 		if(delay < 0) {
 			new Bullet((int) x, (int) y, 5, angle, parent);
+			new Particle((int) x, (int) y, Color.BLUE);
 			delay = (int) (10 * Math.random()) + 5;
 		}
 	}
@@ -19,5 +25,9 @@ public class Cannon extends Block{
 		super.tick();
 		
 		delay--;
+	}
+	@Override
+	public BufferedImage getImg() {
+		return ImageLoader.get("cannon");
 	}
 }

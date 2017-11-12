@@ -14,6 +14,10 @@ public class Bullet extends Entity{
 		vx = speed * Math.cos(angle);
 		vy = speed * Math.sin(angle);
 		
+		Ship hack = (Ship) parent;
+		vx += hack.vx;
+		vy += hack.vy;
+		
 		this.parent = parent;
 		
 		GameManager.gm.addBullet(this);
@@ -42,6 +46,5 @@ public class Bullet extends Entity{
 	}
 	public Object getParent() {
 		return parent;
-	}
-	
+	}	
 }

@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import game.Bullet;
 import game.Entity;
+import game.particles.Particle;
 
 public class Block extends Entity{
 	private int health = 10;
@@ -29,6 +30,7 @@ public class Block extends Entity{
 		if(!b.isAlive())return;
 		b.hit();
 		
+		new Particle((int) x, (int) y, Color.RED);
 		health--;
 		if(health <= 0)alive = false;
 	}

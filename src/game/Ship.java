@@ -23,7 +23,6 @@ public class Ship extends Entity{
 		super(x, y);
 		
 		for(int i = -3; i < 4; i++)blocks.add(new Cannon(10 * i,0,this));
-		blocks.add(new Block(10, 0, this));
 		
 		for(Block b: blocks) {
 			double mag = b.getX() * b.getX() + b.getY() + b.getY();

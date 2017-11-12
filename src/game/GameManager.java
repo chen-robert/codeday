@@ -25,8 +25,7 @@ public class GameManager {
 		collidable = new ArrayList<Ship>();
 		
 		p = new Player();
-		entities.add(p);
-		entities.add(new Ship(105, 5));
+		new Ship(105, 5);
 	}
 	public void tick() {
 		for(Entity e: entities) {
