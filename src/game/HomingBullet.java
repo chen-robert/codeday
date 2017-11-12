@@ -16,7 +16,7 @@ public class HomingBullet extends Bullet{
 		this.speed = speed;
 		this.target = target;
 		
-		this.ticks = -1000;
+		this.ticks = -100;
 	}
 	@Override
 	public void tick() {

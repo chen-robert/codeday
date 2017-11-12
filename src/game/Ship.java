@@ -23,23 +23,23 @@ public class Ship extends Entity{
 	}
 	public Ship(int x, int y) {
 		super(x, y);
-		
-		for(int i = -3; i < 4; i++) {
-			for(int z = -1; z < 2; z++) {
+
+		int len = (int) (5 * Math.random());
+		int wid = (int) (5 * Math.random());
+		for(int i = -len; i <= len; i++) {
+			for(int z = -wid; z <= wid; z++) {
 				if(Math.random() < 0.8) {
 					double val = Math.random();
 					if(val < 0.5) blocks.add(new Thruster(10*i,10*z,this));
-					else if(val < 0.6)blocks.add(new Cannon(10*i,10*z,this));
+					else if(val < 1)blocks.add(new Cannon(10*i,10*z,this));
 					else blocks.add(new MissileLauncher(10*i,10*z,this));
 				}
 			}
 		}
 		buildInfo();
-		for(Block b: blocks) {
-			Info n = lookup.get(b);
-		}
 		removeUnconnected();
 		
+		tick();
 		GameManager.gm.addShip(this);
 	}
 	public Ship(int x, int y, List<Block> blocks) {

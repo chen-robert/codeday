@@ -25,8 +25,6 @@ public class GameManager {
 		collidable = new ArrayList<Ship>();
 		
 		p = new Player();
-		for(int i = 0; i < 5; i++)new AI((int) (1000 * Math.random()) - 500,
-				(int) (1000 * Math.random() - 500));
 	}
 	public void tick() {
 		for(Entity e: entities) {
@@ -38,13 +36,14 @@ public class GameManager {
 		testCollisions();
 		cleanup();
 		
-		if(collidable.size() < 4) {
-			new AI(p.getX() + (int) (300 * Math.random()), p.getY() + (int) (300 * Math.random()));
+		if(collidable.size() < 100) {
+			new AI(p.getX() + (int) (1000 * Math.random()), p.getY() + (int) (1000 * Math.random()));
 		}
 		if(!p.isAlive()) {
 			p.x = collidable.get(0).x;
 			p.y = collidable.get(0).y;
 		}
+		
 	}
 	public Ship getClosest(Entity e, Object parent) {
 		int bestDist = 1 << 30;

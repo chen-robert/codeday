@@ -12,6 +12,7 @@ import game.blocks.MissileLauncher;
 import game.blocks.Thruster;
 
 public class Player extends Ship implements KeyListener{
+	private HashSet<Integer> keys = new HashSet<>();
 	public Player() {
 		super(0,0);
 	}
@@ -24,7 +25,6 @@ public class Player extends Ship implements KeyListener{
 		super.tick();		
 		processKeys();
 	}
-	private HashSet<Integer> keys = new HashSet<>();
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode();
@@ -36,6 +36,7 @@ public class Player extends Ship implements KeyListener{
 		
 	}
 	public void processKeys() {
+		if(keys == null)return;
 		for(Integer code: keys) {
 			int v = 0;
 			switch(code) {

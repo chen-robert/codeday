@@ -29,7 +29,7 @@ public class Board extends JPanel{
 		gm.tick();
 		
 		List<Entity> entities = gm.getEntities();
-		for(Entity e: entities) {
+		for(Entity e: entities) {			
 			double angle = e.getAngle();
 			BufferedImage img = e.getImg();
 			if(img == null)continue;
