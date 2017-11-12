@@ -12,6 +12,7 @@ public class ImageLoader {
 	static {
 		images = new HashMap<>();
 		load("cannon");
+		load("thruster");
 	}
 	public static BufferedImage get(String s) {
 		return images.get(s);

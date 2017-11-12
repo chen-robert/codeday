@@ -7,6 +7,9 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 
+import game.blocks.Cannon;
+import game.blocks.Thruster;
+
 public class Player extends Ship implements KeyListener{
 	public Player() {
 		super(0,0);
@@ -52,12 +55,17 @@ public class Player extends Ship implements KeyListener{
 				angle-=Math.PI/40;
 				break;
 			case KeyEvent.VK_Z:
-				action();
+				action(Cannon.class);
 				break;
 			}
 
-			vx += 0.3 * v * Math.cos(angle);
-			vy += 0.3 * v * Math.sin(angle);
+			if(v != 0) {
+				double speed = getSpeed();
+				vx += speed * v * Math.cos(angle);
+				vy += speed * v * Math.sin(angle);
+				
+				action(Thruster.class);
+			}
 		}
 	}
 
